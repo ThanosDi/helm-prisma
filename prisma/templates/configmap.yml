@@ -1,0 +1,16 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: prisma-configmap
+  labels:
+    stage: production
+    name: prisma
+    app: prisma
+data:
+  PRISMA_CONFIG: |
+          port: {{ .Values.service.port }}
+          managementApiSecret: {{ .Values.service.prismaSecret }}
+          databases:
+            default:
+              connector: mongo
+              uri: '{{ .Values.service.mongoUri }}'
